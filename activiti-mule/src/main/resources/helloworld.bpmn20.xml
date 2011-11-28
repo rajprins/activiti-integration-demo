@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+	xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	xmlns:activiti="http://activiti.org/bpmn"
+	targetNamespace="http://activiti.org">
+
+	<process id="helloMuleWorld">
+
+		<startEvent id="Start" />
+		<sequenceFlow id="flow1" sourceRef="Start" targetRef="sendMuleTask" />
+
+		<sendTask id="sendMuleTask" activiti:type="mule">
+
+			<extensionElements>
+				<activiti:field name="endpointUrl">
+					<activiti:string>vm://in</activiti:string>
+				</activiti:field>
+				<activiti:field name="language">
+					<activiti:string>juel</activiti:string>
+				</activiti:field>
+				<activiti:field name="payloadExpression">
+					<activiti:expression>${var1}</activiti:expression>
+				</activiti:field>
+				<activiti:field name="resultVariable">
+					<activiti:string>var2</activiti:string>
+				</activiti:field>
+			</extensionElements>
+
+		</sendTask>
+
+		<sequenceFlow id="flow2" sourceRef="sendMuleTask" targetRef="waitState" />
+
+		<receiveTask id="waitState" />
+
+		<sequenceFlow id="flow3" sourceRef="waitState" targetRef="End" />
+
+		<endEvent id="End" />
+
+	</process>
+</definitions>

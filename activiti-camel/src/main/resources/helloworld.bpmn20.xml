@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	targetNamespace="http://activiti.org" xmlns:activiti="http://activiti.org/bpmn">
+
+	<process id="helloCamelProcess">
+		<startEvent id="Start" />
+		
+		<sequenceFlow sourceRef="Start" targetRef="serviceTask1" />
+		
+		<serviceTask id="serviceTask1" activiti:delegateExpression="${camel}" />
+		
+		<sequenceFlow sourceRef="serviceTask1" targetRef="waitState" />
+		
+		<receiveTask id="waitState" />
+		
+		<sequenceFlow sourceRef="waitState" targetRef="End" />
+		
+		<endEvent id="End" />
+	</process>
+</definitions>
