@@ -1,0 +1,1 @@
+Demo code for the CIBER knowledge blog article on integrating Activiti with Mule and Apache Camel
